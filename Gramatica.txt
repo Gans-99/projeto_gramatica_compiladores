@@ -1,0 +1,19 @@
+#NóPrincipal
+  <Historia> ::= O <Personagem> <Acao> o <Objeto> PONTO
+
+#NóSecundário
+  <Personagem> ::= GATO | MENINO | DRAGAO
+  <Acao> ::= COMEU | ACHOU | DERRUBOU
+  <Objeto> ::= PAO | LIVRO | CASTELO
+
+O é a palavra 'O'
+GATO é a palavra 'gato'
+MENINO é a palavra 'menino'
+DRAGAO é a palavra 'dragao'
+COMEU é a palavra 'comeu'
+ACHOU é a palavra 'achou'
+DERRUBOU é a palavra 'derrubou'
+PAO é a palavra 'pao'
+LIVRO é a palavra 'livro'
+CASTELO é a palavra 'castelo'
+PONTO é o símbolo '.'
