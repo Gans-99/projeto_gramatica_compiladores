@@ -4,18 +4,24 @@ from Parser import Parser
 
 class Repl(Cmd):
     prompt = 'UFC> '
-    intro = "Bem vindo!\nDigite\n :h para ajuda\n :q para sair e imprimir o assembly\n :s para um exemplo!"
+    intro = "Bem vindo!\nDigite\n :h para ajuda\n :q para sair \n :s para ver a gramática e um exemplo!"
 
     def do_exit(self, inp):
         return True
     def help_exit(self):
-        print('Digite\n :q para sair\n :s para um exemplo!')
+        print('Digite\n :q para sair\n :s para ver a gramática e um exemplo!')
         return False
     def emptyline(self): # Disabilita repeticao do ultimo comando
         pass
     def do_s(self):
-        print("Samples:")
-        print('    1+3*8*(1+2)')
+        print("GRAMATICA:")
+        print(
+                '<Historia> ::= "O " <Personagem> " " <Acao> " o " <Objeto> "."\n'
+                '<Personagem> ::= "gato" | "menino" | "dragao"\n'
+                '<Acao> ::= "comeu" | "achou" | "derrubou"\n'
+                '<Objeto> ::= "pao" | "livro" | "castelo"\n'
+        )
+        print("EXEMPLO:  O menino achou o livro.\n")
         return False
     def default(self, inp):
         if inp == ':q':
