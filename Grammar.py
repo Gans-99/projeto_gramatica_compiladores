@@ -85,39 +85,45 @@ class Historia(Grammar):
 
 class Personagem(Grammar):
     def Rule(self):
+        personagens = ("gato", "menino", "dragao")
+
         pr = self.GetParserManager()
         tok = self.CurrentToken()
-        if tok.type == Consts.ID and tok.value in ("gato", "menino", "dragao"):
+        if tok.type == Consts.ID and tok.value in personagens:
             # return the value as node
             val = tok.value
             self.NextToken()
             return pr.success({"type": "Personagem", "value": val})
         return pr.fail(
-            f"{Error.parserError}: Esperado um Personagem ('gato', 'menino' ou 'dragao')"
+            f"{Error.parserError}: Esperado um Personagem ({', '.join(personagens[:-1])} ou {personagens[-1]})"
         )
 
 
 class Acao(Grammar):
     def Rule(self):
+        acoes = ("comeu", "achou", "derrubou")
+
         pr = self.GetParserManager()
         tok = self.CurrentToken()
-        if tok.type == Consts.ID and tok.value in ("comeu", "achou", "derrubou"):
+        if tok.type == Consts.ID and tok.value in acoes:
             val = tok.value
             self.NextToken()
             return pr.success({"type": "Acao", "value": val})
         return pr.fail(
-            f"{Error.parserError}: Esperado uma Acao ('comeu', 'achou' ou 'derrubou')"
+            f"{Error.parserError}: Esperado uma Acao ({', '.join(acoes[:-1])} ou {acoes[-1]})"
         )
 
 
 class Objeto(Grammar):
     def Rule(self):
+        objetos = ("pao", "livro", "castelo")
+
         pr = self.GetParserManager()
         tok = self.CurrentToken()
-        if tok.type == Consts.ID and tok.value in ("pao", "livro", "castelo"):
+        if tok.type == Consts.ID and tok.value in objetos:
             val = tok.value
             self.NextToken()
             return pr.success({"type": "Objeto", "value": val})
         return pr.fail(
-            f"{Error.parserError}: Esperado um Objeto ('pao', 'livro' ou 'castelo')"
+            f"{Error.parserError}: Esperado um Objeto ({', '.join(objetos[:-1])} ou {objetos[-1]})"
         )
