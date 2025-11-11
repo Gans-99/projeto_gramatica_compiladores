@@ -17,7 +17,7 @@ class Lexer:
     def __advanceCalc(self, _char=None):
         self.indice += 1
         self.coluna += 1
-        if _char == '\n':
+        if _char == "\n":
             self.linha += 1
             self.coluna = 0
         return self
@@ -26,7 +26,7 @@ class Lexer:
         tokens = []
         while self.current != None:
             # whitespace
-            if self.current in ' \t\n\r':
+            if self.current in " \t\n\r":
                 self.__advance()
                 continue
 
@@ -36,8 +36,8 @@ class Lexer:
                 continue
 
             # punctuation: dot (.)
-            if self.current == '.':
-                tokens.append(Token(Consts.DOT, '.'))
+            if self.current == ".":
+                tokens.append(Token(Consts.DOT, "."))
                 self.__advance()
                 continue
 
@@ -58,14 +58,14 @@ class Lexer:
         stri = ""
         bypass = False
         self.__advance()
-        specialChars = {'n':'\n', 't': '\t'}
-        while (self.current != None and (self.current != '"' or bypass)):
-            if (bypass):
+        specialChars = {"n": "\n", "t": "\t"}
+        while self.current != None and (self.current != '"' or bypass):
+            if bypass:
                 c = specialChars.get(self.current, self.current)
                 stri += c
                 bypass = False
             else:
-                if (self.current == '\\'):
+                if self.current == "\\":
                     bypass = True
                 else:
                     stri += self.current
@@ -76,8 +76,10 @@ class Lexer:
         return Token(Consts.STRING, stri)
 
     def __makeIdentifier(self):
-        id_str = ''
-        while self.current != None and (self.current in Consts.LETRAS_DIGITOS + Consts.UNDER):
+        id_str = ""
+        while self.current != None and (
+            self.current in Consts.LETRAS_DIGITOS + Consts.UNDER
+        ):
             id_str += self.current
             self.__advance()
         # normalize to lowercase for comparisons in grammar

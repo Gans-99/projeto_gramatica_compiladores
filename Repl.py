@@ -2,36 +2,42 @@ from Lexer import Lexer
 from cmd import Cmd
 from Parser import Parser
 
+
 class Repl(Cmd):
-    prompt = 'UFC> '
+    prompt = "UFC> "
     intro = "Bem vindo!\nDigite\n :h para ajuda\n :q para sair \n :s para ver a gramática e um exemplo!"
 
     def do_exit(self, inp):
         return True
+
     def help_exit(self):
-        print('Digite\n :q para sair\n :s para ver a gramática e um exemplo!')
+        print("Digite\n :q para sair\n :s para ver a gramática e um exemplo!")
         return False
-    def emptyline(self): # Disabilita repeticao do ultimo comando
+
+    def emptyline(self):  # Disabilita repeticao do ultimo comando
         pass
+
     def do_s(self):
         print("GRAMATICA:")
         print(
-                '<Historia> ::= "O " <Personagem> " " <Acao> " o " <Objeto> "."\n'
-                '<Personagem> ::= "gato" | "menino" | "dragao"\n'
-                '<Acao> ::= "comeu" | "achou" | "derrubou"\n'
-                '<Objeto> ::= "pao" | "livro" | "castelo"\n'
+            '<Historia> ::= "O " <Personagem> " " <Acao> " o " <Objeto> "."\n'
+            '<Personagem> ::= "gato" | "menino" | "dragao"\n'
+            '<Acao> ::= "comeu" | "achou" | "derrubou"\n'
+            '<Objeto> ::= "pao" | "livro" | "castelo"\n'
         )
         print("EXEMPLO:  O menino achou o livro.\n")
         return False
+
     def default(self, inp):
-        if inp == ':q':
+        if inp == ":q":
             return self.do_exit(inp)
-        elif inp == ':h':
+        elif inp == ":h":
             return self.help_exit()
-        elif inp == ':s':
+        elif inp == ":s":
             return self.do_s()
         self.analisador(inp)
         return False
+
     do_EOF = do_exit
     help_EOF = help_exit
 
@@ -42,7 +48,7 @@ class Repl(Cmd):
         if error:
             print(error)
             return None, error
-        print(f'Lexer: {tokens}')
+        print(f"Lexer: {tokens}")
 
         # Gerar AST
         astInfo = Parser.instance().Parsing(tokens)
@@ -50,10 +56,10 @@ class Repl(Cmd):
 
         if error:
             return None, error
-        print(f'Parser: {semanticNode}')
+        print(f"Parser: {semanticNode}")
         return semanticNode, error
 
     def analisador(self, linha):
         resultado, error = self.run(linha)
         if error:
-            print(f'Log de Erro: {error}')
+            print(f"Log de Erro: {error}")
