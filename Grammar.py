@@ -80,6 +80,10 @@ class Historia(Grammar):
             "acao": acao_node,
             "objeto": objeto_node,
         }
+
+        if self.CurrentToken().type != Consts.EOF:
+            return self.Rule()
+
         return pr.success(node)
 
 

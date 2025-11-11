@@ -1,5 +1,5 @@
 #NóPrincipal
-  <Historia> ::= O <Personagem> <Acao> o <Objeto> PONTO
+  <Historia> ::= O <Personagem> <Acao> o <Objeto> PONTO [<Historia>]
 
 #NóSecundário
   <Personagem> ::= GATO | MENINO | DRAGAO
