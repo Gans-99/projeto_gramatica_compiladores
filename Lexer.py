@@ -30,11 +30,6 @@ class Lexer:
                 self.__advance()
                 continue
 
-            # numbers (keep original behavior)
-            if self.current in Consts.DIGITOS:
-                tokens.append(self.__makeNumber())
-                continue
-
             # strings (keep original behavior)
             if self.current == '"':
                 tokens.append(self.__MakeString())
@@ -51,36 +46,6 @@ class Lexer:
                 tokens.append(self.__makeIdentifier())
                 continue
 
-            # other single-char tokens kept for compatibility (operators etc.)
-            if self.current == Consts.PLUS:
-                tokens.append(Token(Consts.PLUS))
-                self.__advance()
-                continue
-            if self.current == Consts.MINUS:
-                tokens.append(Token(Consts.MINUS))
-                self.__advance()
-                continue
-            if self.current == Consts.MUL:
-                tokens.append(Token(Consts.MUL))
-                self.__advance()
-                continue
-            if self.current == Consts.DIV:
-                tokens.append(Token(Consts.DIV))
-                self.__advance()
-                continue
-            if self.current == Consts.POW:
-                tokens.append(Token(Consts.POW))
-                self.__advance()
-                continue
-            if self.current == Consts.LPAR:
-                tokens.append(Token(Consts.LPAR))
-                self.__advance()
-                continue
-            if self.current == Consts.RPAR:
-                tokens.append(Token(Consts.RPAR))
-                self.__advance()
-                continue
-
             # unknown symbol -> produce lexer error
             bad = self.current
             self.__advance()
@@ -88,26 +53,6 @@ class Lexer:
 
         tokens.append(Token(Consts.EOF))
         return tokens, None
-
-    def __makeNumber(self):
-        strNumber = ''
-        dotCount = 0
-        while self.current != None and (self.current in Consts.DIGITOS or self.current == '.'):
-            if self.current == '.':
-                if dotCount == 1: break
-                dotCount += 1
-                strNumber += '.'
-            else:
-                strNumber += self.current
-            self.__advance()
-
-        if strNumber == "":
-            return Token(Consts.INT, 0)
-
-        if dotCount == 0:
-            return Token(Consts.INT, int(strNumber))
-        else:
-            return Token(Consts.FLOAT, float(strNumber))
 
     def __MakeString(self):
         stri = ""
